@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://oglyjhm7gndv"
+path="res://.godot/imported/Kalamle Music.mp3-d9ced38efc28db6dc3633ea901f0573e.mp3str"
+
+[deps]
+
+source_file="res://Assets/Music/Kalamle Music.mp3"
+dest_files=["res://.godot/imported/Kalamle Music.mp3-d9ced38efc28db6dc3633ea901f0573e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

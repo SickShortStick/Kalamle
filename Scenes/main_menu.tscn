@@ -1,0 +1,119 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbcv0op4eyasa"]
+
+[ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_o1tcy"]
+[ext_resource type="PackedScene" uid="uid://lw4jgjfnuvd8" path="res://Scenes/word_particle.tscn" id="3_ww0uy"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_6b4k5"]
+viewport_path = NodePath("SubViewport")
+
+[node name="MainMenu" type="Node"]
+script = ExtResource("1_o1tcy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -20
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.866667, 0.901961, 0.929412, 1)
+metadata/_edit_lock_ = true
+
+[node name="Particles" type="Node" parent="."]
+
+[node name="WordParticle" parent="Particles" instance=ExtResource("3_ww0uy")]
+self_modulate = Color(0.584314, 0.584314, 0.584314, 1)
+light_mask = 0
+position = Vector2(182, -85)
+texture = SubResource("ViewportTexture_6b4k5")
+emission_rect_extents = Vector2(170, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -149.0
+offset_right = 151.0
+offset_bottom = 219.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DailyButton" type="Button" parent="VBoxContainer2/HBoxContainer"]
+clip_children = 2
+layout_mode = 2
+size_flags_horizontal = 3
+text = "روزانه"
+
+[node name="StartButton" type="Button" parent="VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "بی نهایت"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="SettingsButton" type="Button" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 1.75
+text = "تنظیمات"
+
+[node name="LevelsButton" type="Button" parent="VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 3.0
+text = "مرحله ها"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="QuitButton" type="Button" parent="VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "خروج"
+
+[node name="Title" type="Label" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = -228.0
+offset_right = 150.0
+offset_bottom = -182.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.321569, 0.427451, 0.509804, 1)
+theme_override_font_sizes/font_size = 64
+text = "کلمل"
+horizontal_alignment = 2
+vertical_alignment = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Line2D" type="Line2D" parent="Title"]
+position = Vector2(39, 59.5)
+points = PackedVector2Array(-51, 0, 98, 0)
+width = 2.0
+default_color = Color(0.321569, 0.427451, 0.509804, 1)
+
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/DailyButton" to="." method="_on_daily_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer2/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer2/LevelsButton" to="." method="_on_levels_button_pressed"]
+[connection signal="pressed" from="VBoxContainer2/HBoxContainer3/QuitButton" to="." method="_on_quit_button_pressed"]

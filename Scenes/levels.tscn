@@ -1,0 +1,301 @@
+[gd_scene load_steps=11 format=3 uid="uid://jqk82v0f2ao1"]
+
+[ext_resource type="Theme" uid="uid://xmkaqew0wm0o" path="res://game_theme.tres" id="1_fhsfx"]
+[ext_resource type="Script" path="res://Scripts/levels.gd" id="1_kb6n2"]
+[ext_resource type="PackedScene" uid="uid://dldqypg5hj58q" path="res://Scenes/level_button.tscn" id="2_74k8g"]
+[ext_resource type="PackedScene" uid="uid://lw4jgjfnuvd8" path="res://Scenes/word_particle.tscn" id="4_s38jl"]
+[ext_resource type="Texture2D" uid="uid://d1fcwkxmndk4a" path="res://Assets/Sprites/ArrowIcon.png" id="6_iegal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nkgd4"]
+bg_color = Color(0.866667, 0.901961, 0.929412, 1)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_x4sof"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7ud8k"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_0ns47"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i66ef"]
+viewport_path = NodePath("SubViewport")
+
+[node name="Levels" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_kb6n2")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+z_index = 10
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -170.0
+offset_top = -23.0
+offset_right = 170.0
+offset_bottom = 47.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="PreviousButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LevelUiButton"
+action_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/PreviousButton"]
+clip_children = 2
+layout_mode = 0
+anchor_top = 0.126984
+anchor_right = 0.977273
+anchor_bottom = 0.857143
+mouse_filter = 2
+texture = ExtResource("6_iegal")
+expand_mode = 4
+stretch_mode = 5
+flip_h = true
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/PreviousButton/TextureRect"]
+layout_mode = 0
+anchor_right = 0.930233
+anchor_bottom = 1.02174
+mouse_filter = 2
+color = Color(0.866667, 0.901961, 0.929412, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 6.0
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="NextButton" type="Button" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_type_variation = &"LevelUiButton"
+action_mode = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/NextButton"]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.126984
+anchor_right = 0.977273
+anchor_bottom = 0.857143
+mouse_filter = 2
+texture = ExtResource("6_iegal")
+expand_mode = 4
+stretch_mode = 5
+metadata/_edit_use_anchors_ = true
+
+[node name="ColorRect" type="ColorRect" parent="HBoxContainer/NextButton/TextureRect"]
+layout_mode = 0
+anchor_right = 0.930233
+anchor_bottom = 1.02174
+mouse_filter = 2
+color = Color(0.866667, 0.901961, 0.929412, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 2
+offset_right = 360.0
+offset_bottom = 640.0
+mouse_filter = 0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 300
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 270
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -180.0
+offset_top = -320.0
+offset_right = 180.0
+offset_bottom = 320.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_nkgd4")
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="MarginContainer2" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="LevelsLabel" type="Label" parent="PanelContainer/VBoxContainer"]
+z_index = 5
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.321569, 0.427451, 0.509804, 1)
+theme_override_font_sizes/font_size = 60
+text = "مرحله ها"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+mouse_filter = 2
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 30
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/VBoxContainer/MarginContainer"]
+z_index = 5
+layout_mode = 2
+theme = ExtResource("1_fhsfx")
+columns = 4
+
+[node name="LevelButton" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton2" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton3" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton4" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton5" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton6" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton7" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton8" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton9" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton10" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton11" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton12" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton13" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton14" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton15" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton16" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton17" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton18" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton19" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="LevelButton20" parent="PanelContainer/VBoxContainer/MarginContainer/GridContainer" instance=ExtResource("2_74k8g")]
+layout_mode = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="PanelContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 60
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 60
+theme_override_constants/margin_bottom = 40
+
+[node name="BackButton" type="Button" parent="PanelContainer/VBoxContainer/MarginContainer3"]
+z_index = 10
+layout_mode = 2
+size_flags_vertical = 3
+theme_type_variation = &"LevelUiButton"
+text = "بازگشت"
+
+[node name="Particles" type="Node" parent="."]
+
+[node name="WordParticle" parent="Particles" instance=ExtResource("4_s38jl")]
+self_modulate = Color(0.584314, 0.584314, 0.584314, 1)
+light_mask = 0
+z_index = 1
+texture = SubResource("ViewportTexture_x4sof")
+
+[node name="WordParticle2" parent="Particles" instance=ExtResource("4_s38jl")]
+self_modulate = Color(0.584314, 0.584314, 0.584314, 1)
+light_mask = 0
+z_index = 1
+position = Vector2(-110, 622)
+texture = SubResource("ViewportTexture_7ud8k")
+emission_rect_extents = Vector2(1, 640)
+direction = Vector2(1, 0)
+
+[node name="WordParticle3" parent="Particles" instance=ExtResource("4_s38jl")]
+self_modulate = Color(0.584314, 0.584314, 0.584314, 1)
+light_mask = 0
+z_index = 1
+position = Vector2(819, 622)
+texture = SubResource("ViewportTexture_0ns47")
+emission_rect_extents = Vector2(1, 640)
+direction = Vector2(-1, 0)
+
+[node name="WordParticle4" parent="Particles" instance=ExtResource("4_s38jl")]
+self_modulate = Color(0.584314, 0.584314, 0.584314, 1)
+light_mask = 0
+z_index = 1
+position = Vector2(360, 1370)
+texture = SubResource("ViewportTexture_i66ef")
+direction = Vector2(0, -1)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -20
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.866667, 0.901961, 0.929412, 1)
+metadata/_edit_use_anchors_ = true
+
+[connection signal="pressed" from="HBoxContainer/PreviousButton" to="." method="_on_previous_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="pressed" from="PanelContainer/VBoxContainer/MarginContainer3/BackButton" to="." method="_on_back_button_pressed"]

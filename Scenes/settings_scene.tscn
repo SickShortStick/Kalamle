@@ -1,0 +1,64 @@
+[gd_scene load_steps=2 format=3 uid="uid://bmtot6lfv618d"]
+
+[ext_resource type="Script" path="res://Scripts/settings_scene.gd" id="1_pnrfk"]
+
+[node name="SettingsScene" type="Node"]
+script = ExtResource("1_pnrfk")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = -10
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.866667, 0.901961, 0.929412, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -153.0
+offset_top = -114.0
+offset_right = 154.0
+offset_bottom = 240.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.12549, 0.227451, 1)
+text = "موسیقی"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="MusicSlider" type="HSlider" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"MusicSlider"
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="BackButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+text = "بازگشت"
+
+[node name="Control" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[connection signal="drag_ended" from="VBoxContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]
