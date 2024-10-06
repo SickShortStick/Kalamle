@@ -7,8 +7,10 @@ extends Node
 
 
 @export var word : String = ""
+@export var max_timer_seconds = 60
+var initial_congrats_panel_position : Vector2
+var final_congrats_panel_position : Vector2
 var high_score := 0
-var max_timer_seconds = 60
 var guessed_times : int = 0
 var guessed_word : String = ""
 var guessed_words : Array
@@ -45,24 +47,29 @@ var persian_alphabet = [
 @onready var word_text = $Panel/WordText
 @onready var icon = $HBoxContainer/RetryButton/TextureRect
 @onready var retry_button = $HBoxContainer/RetryButton
-@onready var win_panel_container = $WinPanelContainer
-@onready var score_label = $WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2/ScoreLabel
-@onready var win_label = $WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/WinLabel
-@onready var win_panel_retry_button = $WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton
-@onready var win_panel_main_menu_button = $WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton
-@onready var next_level_button = $WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton
-@onready var previous_level_button = $WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton
-@onready var word_label = $WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/WordLabel
+@onready var win_panel_container = $CongratsPanel/WinPanelContainer
+@onready var score_label = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2/ScoreLabel
+@onready var win_label = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/WinLabel
+@onready var win_panel_retry_button = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton
+@onready var win_panel_main_menu_button = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton
+@onready var next_level_button = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton
+@onready var previous_level_button = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton
+@onready var word_label = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/WordLabel
 @onready var timer = $Timer
 @onready var timer_slider = $PanelContainer/HBoxContainer/TimerSlider
 @onready var score_label_ui = $ScoreLabel
 @onready var error_container = $ErrorContainer
-@onready var dimmer = $Dimmer
-@onready var high_score_label = $WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2/HighScoreLabel
+@onready var dimmer = $CongratsPanel/Dimmer
+@onready var high_score_label = $CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2/HighScoreLabel
 @onready var music_player = $MusicPlayer
+@onready var correct_sound = $CorrectSound
+@onready var congrats_panel = $CongratsPanel
 
 
 func _ready():
+	initial_congrats_panel_position = congrats_panel.position
+	print(get_viewport().size)
+	final_congrats_panel_position = Vector2(0, get_viewport().size[1])
 	var music_tween = get_tree().create_tween()
 	music_tween.tween_property(music_player, "volume_db", 0, 2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
 	set_up_grid()
@@ -105,7 +112,6 @@ func _ready():
 	high_score = Word.high_score
 	word = Word.game_word
 	create_word_letters_count()
-	print(word_letters_count)
 	word_text.grab_focus()
 
 
@@ -179,6 +185,7 @@ func create_word_letters_count():
 
 
 func set_up_game_ui():
+	congrats_panel.set_position(initial_congrats_panel_position)
 	score_label_ui.text = "0"
 	match current_gamemode:
 		GameModes.Levels:
@@ -211,6 +218,7 @@ func guess():
 			lose()
 		else:
 			row += 1
+			guessed_words.append(guessed_word)
 		word_text.text = ""
 		match current_gamemode:
 			GameModes.Daily:
@@ -219,7 +227,7 @@ func guess():
 					Word.daily_guessed_words = guessed_words
 				SaveManager.save_data()
 			_:
-				guessed_words.append(guessed_word)
+				pass
 		guessed_word = ""
 		if current_gamemode == GameModes.Endless:
 			timer.start(timer.time_left + 2)
@@ -272,15 +280,17 @@ func check_for_in_word_letter():
 
 
 func lose():
+	music_player.stop()
 	game_ended = true
 	win_label.text = "باخت!"
 	win_label.add_theme_color_override("font_color", Color.RED)
+	win_label.add_theme_color_override("font_outline_color", Color.RED)
 	word_text.release_focus()
 	match current_gamemode:
 		GameModes.Endless:
 			score_label.show()
 			score_label.text = "امتیاز\n" + str(score)
-			word_label.text = word
+			word_label.text = "کلمه: " + word
 			word_label.show()
 			previous_level_button.hide()
 			next_level_button.hide()
@@ -288,7 +298,7 @@ func lose():
 			if score > high_score:
 				high_score = score
 				Word.set_high_score(high_score)
-			high_score_label = "رکورد\n" + str(high_score)
+			high_score_label.text = "رکورد\n" + str(high_score)
 		GameModes.Levels:
 			word_label.hide()
 			score_label.hide()
@@ -303,6 +313,7 @@ func lose():
 			win_panel_retry_button.hide()
 			previous_level_button.hide()
 			next_level_button.hide()
+	congrats_panel_slide()
 	score = 0
 	win_panel_main_menu_button.show()
 	win_panel_container.show()
@@ -317,9 +328,12 @@ func correct_word():
 			game_ended = true
 			score_label.hide()
 			win_label.add_theme_color_override("font_color", Color("1fd655"))
+			win_label.add_theme_color_override("font_outline_color", Color("1fd655"))
 			dimmer.show()
 			win_label.text = "برد!"
 			win_panel_retry_button.hide()
+			correct_sound.play()
+			congrats_panel_slide()
 			Word.add_completed_level()
 			if Word.level < Word.max_level_count:
 				next_level_button.show()
@@ -331,12 +345,20 @@ func correct_word():
 				previous_level_button.hide()
 			win_panel_container.show()
 		GameModes.Endless:
+			guessed_words.clear()
 			score += 1
 			score_label_ui.text = str(score)
 			timer.start(timer.time_left + 7)
 			word = Word.set_game_word()
+			if score > high_score:
+				high_score = score
+				Word.set_high_score(high_score)
+			correct_sound.volume_db = -8
+			correct_sound.play()
 			set_up_game_vars()
 		GameModes.Daily:
+			congrats_panel_slide()
+			correct_sound.play()
 			Word.daily_words_done.append([Word.day, true, true])
 			win_panel_container.show()
 			dimmer.show()
@@ -344,6 +366,7 @@ func correct_word():
 			win_panel_retry_button.hide()
 			previous_level_button.hide()
 			next_level_button.hide()
+	await correct_sound.finished
 
 
 func clear_letters():
@@ -356,6 +379,11 @@ func clear_letters():
 			color_rect.color.a = 0
 	row = 0
 	col = 0
+
+
+func congrats_panel_slide():
+	var win_panel_tween = get_tree().create_tween()
+	win_panel_tween.tween_property(congrats_panel, "position", Vector2.ZERO, 1.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
 
 
 func set_up_game_vars():
@@ -386,6 +414,7 @@ func _on_retry_pressed():
 	dimmer.hide()
 	win_panel_container.hide()
 	timer.start(max_timer_seconds)
+	set_up_game_ui()
 	set_up_game_vars()
 
 
@@ -395,6 +424,7 @@ func _on_retry_button_up():
 
 func _on_back_button_pressed():
 	SceneManager.change_scene(back_button_scene)
+	SaveManager.save_data()
 
 
 func _on_next_level_button_pressed():
@@ -424,6 +454,7 @@ func _on_win_panel_retry_button_pressed():
 	win_panel_container.hide()
 	dimmer.hide()
 	timer.start(max_timer_seconds)
+	set_up_game_ui()
 	set_up_game_vars()
 
 

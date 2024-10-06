@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://xlx2uml8ju7d"]
+[gd_scene load_steps=12 format=3 uid="uid://xlx2uml8ju7d"]
 
 [ext_resource type="Script" path="res://Scripts/game_handle.gd" id="1_e6amu"]
 [ext_resource type="Texture2D" uid="uid://ktsetih0vjqk" path="res://Assets/Sprites/retry-svgrepo-com.svg" id="2_n7mml"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://t2sx8wiht4s1" path="res://Assets/Sprites/Home-icon.svg.png" id="4_ply6n"]
 [ext_resource type="Texture2D" uid="uid://bs4ukm126ayfs" path="res://Assets/Sprites/timer-icon.svg" id="5_d0cdf"]
 [ext_resource type="FontFile" uid="uid://bix4fiwnaqw83" path="res://Assets/Font/Vazir.ttf" id="6_6krb6"]
+[ext_resource type="AudioStream" uid="uid://iw2b3k0hqhpg" path="res://Assets/Sounds/CorrectSound.mp3" id="6_23s3h"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_axxpv"]
 
@@ -29,6 +30,7 @@ corner_radius_bottom_left = 10
 [node name="MainScene" type="Node"]
 script = ExtResource("1_e6amu")
 word = "رایان"
+max_timer_seconds = 2
 correct_color = Color(0.121569, 0.839216, 0.333333, 1)
 incorrect_color = Color(0.321569, 0.427451, 0.509804, 1)
 in_word_color = Color(1, 0.870588, 0.129412, 1)
@@ -512,7 +514,7 @@ autoplay = true
 bus = &"Music"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = -1
+anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -706,9 +708,22 @@ text = "کلمه مجاز نیست!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Dimmer" type="ColorRect" parent="."]
-visible = false
+[node name="CorrectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_23s3h")
+
+[node name="CongratsPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -640.0
+offset_bottom = -640.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Dimmer" type="ColorRect" parent="CongratsPanel"]
 z_index = 20
+layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -716,11 +731,10 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 color = Color(0.627451, 0.717647, 0.788235, 1)
-metadata/_edit_use_anchors_ = true
 
-[node name="WinPanelContainer" type="PanelContainer" parent="."]
-visible = false
+[node name="WinPanelContainer" type="PanelContainer" parent="CongratsPanel"]
 z_index = 21
+layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -735,39 +749,41 @@ grow_vertical = 2
 size_flags_horizontal = 4
 mouse_filter = 1
 theme_type_variation = &"WinPanelContainer"
-metadata/_edit_use_anchors_ = true
 
-[node name="MarginContainer" type="MarginContainer" parent="WinPanelContainer"]
+[node name="MarginContainer" type="MarginContainer" parent="CongratsPanel/WinPanelContainer"]
 layout_mode = 2
 theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 20
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 15
 
-[node name="VBoxContainer" type="VBoxContainer" parent="WinPanelContainer/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="CongratsPanel/WinPanelContainer/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 10
 
-[node name="PanelContainer" type="PanelContainer" parent="WinPanelContainer/MarginContainer/VBoxContainer"]
+[node name="PanelContainer" type="PanelContainer" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_r8trh")
 
-[node name="WinLabel" type="Label" parent="WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="WinLabel" type="Label" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 0
 theme_type_variation = &"WinPanelLabel"
+theme_override_constants/outline_size = 5
 theme_override_fonts/font = ExtResource("6_6krb6")
+theme_override_font_sizes/font_size = 40
 text = "برد!"
 horizontal_alignment = 1
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
+size_flags_vertical = 4
 theme_override_constants/separation = 40
 alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
+[node name="ScoreLabel" type="Label" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
 layout_mode = 2
 theme_type_variation = &"WinPanelLabel"
 text = "امتیاز
@@ -775,7 +791,7 @@ text = "امتیاز
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="HighScoreLabel" type="Label" parent="WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
+[node name="HighScoreLabel" type="Label" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
 layout_mode = 2
 theme_type_variation = &"WinPanelLabel"
 text = "رکورد
@@ -783,24 +799,24 @@ text = "رکورد
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="WordLabel" type="Label" parent="WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
+[node name="WordLabel" type="Label" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
 size_flags_vertical = 8
 theme_type_variation = &"WinPanelLabel"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="WinPanelContainer/MarginContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 3
 
-[node name="PreviousLevelButton" type="Button" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="PreviousLevelButton" type="Button" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 theme_type_variation = &"WinPanelButton"
 
-[node name="TextureRect" type="TextureRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton"]
+[node name="TextureRect" type="TextureRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton"]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 8
@@ -819,7 +835,7 @@ expand_mode = 4
 stretch_mode = 5
 flip_h = true
 
-[node name="ColorRect" type="ColorRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton/TextureRect"]
+[node name="ColorRect" type="ColorRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -829,7 +845,7 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.152941, 0.215686, 0.301961, 1)
 
-[node name="WinPanelRetryButton" type="Button" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="WinPanelRetryButton" type="Button" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 3.0
@@ -839,7 +855,7 @@ theme_type_variation = &"WinPanelButton"
 action_mode = 0
 icon_alignment = 1
 
-[node name="TextureRect" type="TextureRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton"]
+[node name="TextureRect" type="TextureRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton"]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 15
@@ -853,7 +869,7 @@ texture = ExtResource("2_n7mml")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton/TextureRect"]
+[node name="ColorRect" type="ColorRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -863,13 +879,13 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.152941, 0.215686, 0.301961, 1)
 
-[node name="WinPanelMainMenuButton" type="Button" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="WinPanelMainMenuButton" type="Button" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_type_variation = &"WinPanelButton"
 text = "    "
 
-[node name="TextureRect" type="TextureRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton"]
+[node name="TextureRect" type="TextureRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton"]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 8
@@ -887,7 +903,7 @@ texture = ExtResource("4_ply6n")
 expand_mode = 1
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton/TextureRect"]
+[node name="ColorRect" type="ColorRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton/TextureRect"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -903,13 +919,13 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.152941, 0.215686, 0.301961, 1)
 
-[node name="NextLevelButton" type="Button" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
+[node name="NextLevelButton" type="Button" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 1.5
 theme_type_variation = &"WinPanelButton"
 
-[node name="TextureRect" type="TextureRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton"]
+[node name="TextureRect" type="TextureRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton"]
 clip_children = 2
 layout_mode = 1
 anchors_preset = 8
@@ -927,7 +943,7 @@ texture = ExtResource("3_ieknp")
 expand_mode = 4
 stretch_mode = 5
 
-[node name="ColorRect" type="ColorRect" parent="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton/TextureRect"]
+[node name="ColorRect" type="ColorRect" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton/TextureRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -937,13 +953,13 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.152941, 0.215686, 0.301961, 1)
 
-[connection signal="text_changed" from="Panel/WordText" to="." method="_on_line_edit_text_changed"]
 [connection signal="text_changed" from="Panel/WordText" to="." method="_on_word_text_text_changed"]
+[connection signal="text_changed" from="Panel/WordText" to="." method="_on_line_edit_text_changed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="button_up" from="HBoxContainer/RetryButton" to="." method="_on_retry_button_up"]
 [connection signal="pressed" from="HBoxContainer/RetryButton" to="." method="_on_retry_pressed"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
-[connection signal="pressed" from="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton" to="." method="_on_previous_level_button_pressed"]
-[connection signal="pressed" from="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton" to="." method="_on_win_panel_retry_button_pressed"]
-[connection signal="pressed" from="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton" to="." method="_on_main_menu_button_pressed"]
-[connection signal="pressed" from="WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
+[connection signal="pressed" from="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/PreviousLevelButton" to="." method="_on_previous_level_button_pressed"]
+[connection signal="pressed" from="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelRetryButton" to="." method="_on_win_panel_retry_button_pressed"]
+[connection signal="pressed" from="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/WinPanelMainMenuButton" to="." method="_on_main_menu_button_pressed"]
+[connection signal="pressed" from="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/HBoxContainer/NextLevelButton" to="." method="_on_next_level_button_pressed"]
