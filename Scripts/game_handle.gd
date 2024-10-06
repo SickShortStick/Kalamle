@@ -383,7 +383,7 @@ func clear_letters():
 
 func congrats_panel_slide():
 	var win_panel_tween = get_tree().create_tween()
-	win_panel_tween.tween_property(congrats_panel, "position", Vector2.ZERO, 1.5).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	win_panel_tween.tween_property(congrats_panel, "position", Vector2.ZERO, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 
 func set_up_game_vars():

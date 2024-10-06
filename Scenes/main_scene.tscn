@@ -730,7 +730,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-color = Color(0.627451, 0.717647, 0.788235, 1)
+color = Color(0.627451, 0.717647, 0.788235, 0.639216)
 
 [node name="WinPanelContainer" type="PanelContainer" parent="CongratsPanel"]
 z_index = 21
