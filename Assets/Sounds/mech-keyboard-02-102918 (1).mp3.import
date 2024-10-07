@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://btd3o3b6u3njw"
+path="res://.godot/imported/mech-keyboard-02-102918 (1).mp3-380333bc5a86922c4b59634737da8b35.mp3str"
+
+[deps]
+
+source_file="res://Assets/Sounds/mech-keyboard-02-102918 (1).mp3"
+dest_files=["res://.godot/imported/mech-keyboard-02-102918 (1).mp3-380333bc5a86922c4b59634737da8b35.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

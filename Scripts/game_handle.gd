@@ -116,7 +116,7 @@ func _ready():
 	high_score = Word.high_score
 	word = Word.game_word
 	create_word_letters_count()
-	word_text.grab_focus()
+	#word_text.grab_focus()
 
 
 func _process(delta):
@@ -240,7 +240,7 @@ func guess():
 			await check_for_correct_letter()
 			await check_for_in_word_letter()
 		word_text.editable = true
-		word_text.grab_focus()
+		#word_text.grab_focus()
 		if guessed_word == word:
 			correct_word()
 		elif guessed_times == 6:
@@ -262,7 +262,7 @@ func guess():
 		if current_gamemode == GameModes.Endless:
 			timer.start(timer.time_left + 2)
 		timer.paused = false
-	word_text.grab_focus()
+	#word_text.grab_focus()
 
 
 func check_for_correct_letter():
@@ -422,7 +422,7 @@ func set_up_game_vars():
 	game_ended = false
 	word_text.text = ""
 	word = Word.game_word
-	word_text.grab_focus()
+	#word_text.grab_focus()
 	guessed_words.clear()
 	create_word_letters_count()
 	clear_letters()

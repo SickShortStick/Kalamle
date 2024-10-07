@@ -49,23 +49,16 @@ func _on_button_pressed():
 		ButtonType.Key:
 			if keyboard.key_buttons_pressed.size() < 5:
 				keyboard.key_buttons_pressed.append(self)
+				keyboard.play_keyboard_sound()
 			word_line.text += letter
 			keyboard.text_changed()
 		ButtonType.BackSpace:
 			if len(word_line.text) > 0:
 				word_line.text= word_line.text.erase(len(word_line.text) - 1)
+				keyboard.play_keyboard_sound()
 			if keyboard.key_buttons_pressed.size() > 0:
 				keyboard.key_buttons_pressed.remove_at(keyboard.key_buttons_pressed.size() - 1)
 			keyboard.text_changed()
 		ButtonType.Enter:
 			Input.action_press("Enter")
-			#var i = 0
-			#for button in keyboard.key_buttons_pressed:
-				#if letter == Word.game_word[i]:
-					#turn_green()
-				#elif letter in Word.game_word:
-					#turn_yellow()
-				#else :
-					#turn_gray()
-				#i += 1
-			print("R")
+			keyboard.play_keyboard_sound()

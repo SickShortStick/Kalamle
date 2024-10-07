@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://xlx2uml8ju7d"]
+[gd_scene load_steps=14 format=3 uid="uid://xlx2uml8ju7d"]
 
 [ext_resource type="Script" path="res://Scripts/game_handle.gd" id="1_e6amu"]
 [ext_resource type="PackedScene" uid="uid://0xtxdo2rns4s" path="res://Scenes/key_board.tscn" id="2_grjtk"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://bs4ukm126ayfs" path="res://Assets/Sprites/timer-icon.svg" id="5_d0cdf"]
 [ext_resource type="FontFile" uid="uid://bix4fiwnaqw83" path="res://Assets/Font/Vazir.ttf" id="6_6krb6"]
 [ext_resource type="AudioStream" uid="uid://iw2b3k0hqhpg" path="res://Assets/Sounds/CorrectSound.mp3" id="6_23s3h"]
+[ext_resource type="AudioStream" uid="uid://dpp4dbdt8s5fq" path="res://Assets/Sounds/keyboard-chcl-146641.mp3" id="10_fhyoh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_axxpv"]
 
@@ -42,7 +43,7 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -180.0
-offset_top = -275.0
+offset_top = -278.0
 offset_right = 180.0
 offset_bottom = 76.0
 grow_horizontal = 2
@@ -466,8 +467,8 @@ layout_mode = 2
 
 [node name="KeyBoard" parent="." instance=ExtResource("2_grjtk")]
 offset_left = -166.0
-offset_top = 118.0
-offset_bottom = 265.0
+offset_top = 134.0
+offset_bottom = 281.0
 
 [node name="Panel" type="PanelContainer" parent="."]
 visible = false
@@ -520,17 +521,17 @@ autoplay = true
 bus = &"Music"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-anchors_preset = 8
-anchor_left = 0.5
+anchors_preset = -1
+anchor_left = 0.394444
 anchor_top = 0.5
-anchor_right = 0.5
+anchor_right = 0.594444
 anchor_bottom = 0.5
 offset_left = -128.0
-offset_top = 38.0
+offset_top = 76.0
 offset_right = 128.0
-offset_bottom = 93.0
+offset_bottom = 131.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 metadata/_edit_use_anchors_ = true
@@ -630,9 +631,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -128.0
+offset_left = -148.0
 offset_top = -319.0
-offset_right = -78.0002
+offset_right = -98.0002
 offset_bottom = -261.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -651,9 +652,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -74.0
+offset_left = -84.0
 offset_top = -315.0
-offset_right = 128.0
+offset_right = 148.0
 offset_bottom = -278.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -713,9 +714,6 @@ layout_mode = 2
 text = "کلمه مجاز نیست!"
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="CorrectSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("6_23s3h")
 
 [node name="CongratsPanel" type="Control" parent="."]
 layout_mode = 3
@@ -958,6 +956,15 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 color = Color(0.152941, 0.215686, 0.301961, 1)
+
+[node name="CorrectSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_23s3h")
+bus = &"SFX"
+
+[node name="KeyboardSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_fhyoh")
+max_polyphony = 5
+bus = &"SFX"
 
 [connection signal="text_changed" from="Panel/WordText" to="." method="_on_line_edit_text_changed"]
 [connection signal="text_changed" from="Panel/WordText" to="." method="_on_word_text_text_changed"]
