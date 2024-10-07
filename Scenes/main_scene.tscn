@@ -1,6 +1,7 @@
-[gd_scene load_steps=12 format=3 uid="uid://xlx2uml8ju7d"]
+[gd_scene load_steps=13 format=3 uid="uid://xlx2uml8ju7d"]
 
 [ext_resource type="Script" path="res://Scripts/game_handle.gd" id="1_e6amu"]
+[ext_resource type="PackedScene" uid="uid://0xtxdo2rns4s" path="res://Scenes/key_board.tscn" id="2_grjtk"]
 [ext_resource type="Texture2D" uid="uid://ktsetih0vjqk" path="res://Assets/Sprites/retry-svgrepo-com.svg" id="2_n7mml"]
 [ext_resource type="AudioStream" uid="uid://b0udjjcq3bui4" path="res://Assets/Music/Kalamle Music revised 2.mp3" id="2_tkg3w"]
 [ext_resource type="Texture2D" uid="uid://d1fcwkxmndk4a" path="res://Assets/Sprites/ArrowIcon.png" id="3_ieknp"]
@@ -30,7 +31,6 @@ corner_radius_bottom_left = 10
 [node name="MainScene" type="Node"]
 script = ExtResource("1_e6amu")
 word = "رایان"
-max_timer_seconds = 2
 correct_color = Color(0.121569, 0.839216, 0.333333, 1)
 incorrect_color = Color(0.321569, 0.427451, 0.509804, 1)
 in_word_color = Color(1, 0.870588, 0.129412, 1)
@@ -464,7 +464,13 @@ vertical_alignment = 1
 [node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/HBoxContainer6/PanelContainer6"]
 layout_mode = 2
 
+[node name="KeyBoard" parent="." instance=ExtResource("2_grjtk")]
+offset_left = -166.0
+offset_top = 118.0
+offset_bottom = 265.0
+
 [node name="Panel" type="PanelContainer" parent="."]
+visible = false
 modulate = Color(1, 1, 1, 0)
 anchors_preset = -1
 anchor_left = 0.0333333
@@ -730,7 +736,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
-color = Color(0.627451, 0.717647, 0.788235, 0.639216)
+color = Color(0.627451, 0.717647, 0.788235, 0)
 
 [node name="WinPanelContainer" type="PanelContainer" parent="CongratsPanel"]
 z_index = 21
@@ -953,8 +959,8 @@ grow_vertical = 2
 mouse_filter = 1
 color = Color(0.152941, 0.215686, 0.301961, 1)
 
-[connection signal="text_changed" from="Panel/WordText" to="." method="_on_word_text_text_changed"]
 [connection signal="text_changed" from="Panel/WordText" to="." method="_on_line_edit_text_changed"]
+[connection signal="text_changed" from="Panel/WordText" to="." method="_on_word_text_text_changed"]
 [connection signal="pressed" from="HBoxContainer/MarginContainer/BackButton" to="." method="_on_back_button_pressed"]
 [connection signal="button_up" from="HBoxContainer/RetryButton" to="." method="_on_retry_button_up"]
 [connection signal="pressed" from="HBoxContainer/RetryButton" to="." method="_on_retry_pressed"]

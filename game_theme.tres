@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=50 format=3 uid="uid://xmkaqew0wm0o"]
+[gd_resource type="Theme" load_steps=56 format=3 uid="uid://xmkaqew0wm0o"]
 
 [ext_resource type="FontFile" uid="uid://bix4fiwnaqw83" path="res://Assets/Font/Vazir.ttf" id="1_5jnj5"]
 [ext_resource type="Texture2D" uid="uid://cb4djdeio7715" path="res://Assets/Sprites/Grabber.png" id="2_k8lre"]
@@ -55,6 +55,23 @@ corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dt8rt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_op6hf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_koiix"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mygln"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s04ob"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_br88q"]
+bg_color = Color(0.152941, 0.215686, 0.301961, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fkh4j"]
 
@@ -335,6 +352,16 @@ HeaderLarge/constants/shadow_offset_x = -5
 HeaderLarge/constants/shadow_offset_y = 5
 HeaderLarge/font_sizes/font_size = 64
 HeaderLarge/fonts/font = ExtResource("1_5jnj5")
+KeyBoardButton/base_type = &"Button"
+KeyBoardButton/colors/font_color = Color(0.866667, 0.901961, 0.929412, 1)
+KeyBoardButton/font_sizes/font_size = 15
+KeyBoardButton/styles/disabled = SubResource("StyleBoxEmpty_dt8rt")
+KeyBoardButton/styles/focus = SubResource("StyleBoxEmpty_op6hf")
+KeyBoardButton/styles/hover = SubResource("StyleBoxEmpty_koiix")
+KeyBoardButton/styles/normal = SubResource("StyleBoxEmpty_mygln")
+KeyBoardButton/styles/pressed = SubResource("StyleBoxEmpty_s04ob")
+KeyBoardButtonPanel/base_type = &"PanelContainer"
+KeyBoardButtonPanel/styles/panel = SubResource("StyleBoxFlat_br88q")
 Label/font_sizes/font_size = 32
 LevelButton/base_type = &"Button"
 LevelButton/styles/focus = SubResource("StyleBoxEmpty_fkh4j")

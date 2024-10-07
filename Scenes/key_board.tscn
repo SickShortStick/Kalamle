@@ -1,0 +1,200 @@
+[gd_scene load_steps=5 format=3 uid="uid://0xtxdo2rns4s"]
+
+[ext_resource type="PackedScene" uid="uid://b610w200qrciu" path="res://Scenes/key_board_button.tscn" id="1_3wxrx"]
+[ext_resource type="Script" path="res://Scripts/key_board.gd" id="1_7ihqy"]
+[ext_resource type="Texture2D" uid="uid://i6aaktraup82" path="res://Assets/Sprites/BackSpaceIcon.png" id="3_epjby"]
+[ext_resource type="Texture2D" uid="uid://b70hljq7k4r5h" path="res://Assets/Sprites/EnterIcon.png" id="4_p1jnd"]
+
+[node name="KeyBoard" type="VBoxContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -156.0
+offset_top = 80.0
+offset_right = 162.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7ihqy")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="KeyBoardButton" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ض"
+
+[node name="KeyBoardButton2" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ص"
+
+[node name="KeyBoardButton3" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ث"
+
+[node name="KeyBoardButton4" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ق"
+
+[node name="KeyBoardButton5" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ف"
+
+[node name="KeyBoardButton6" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "غ"
+
+[node name="KeyBoardButton7" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ع"
+
+[node name="KeyBoardButton8" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ه"
+
+[node name="KeyBoardButton9" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "خ"
+
+[node name="KeyBoardButton10" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ح"
+
+[node name="KeyBoardButton11" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ج"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+
+[node name="KeyBoardButton" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ش"
+
+[node name="KeyBoardButton2" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "س"
+
+[node name="KeyBoardButton3" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ی"
+
+[node name="KeyBoardButton4" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+
+[node name="KeyBoardButton5" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ل"
+
+[node name="KeyBoardButton6" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ا"
+
+[node name="KeyBoardButton7" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ت"
+
+[node name="KeyBoardButton8" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ن"
+
+[node name="KeyBoardButton9" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "م"
+
+[node name="KeyBoardButton10" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ک"
+
+[node name="KeyBoardButton11" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "گ"
+
+[node name="KeyBoardButton12" parent="HBoxContainer2" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = ""
+current_button_type = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer2/KeyBoardButton12"]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("3_epjby")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 2
+alignment = 1
+
+[node name="KeyBoardButton" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ظ"
+
+[node name="KeyBoardButton2" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ط"
+
+[node name="KeyBoardButton3" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ژ"
+
+[node name="KeyBoardButton4" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ز"
+
+[node name="KeyBoardButton5" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ر"
+
+[node name="KeyBoardButton6" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "ذ"
+
+[node name="KeyBoardButton7" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "د"
+
+[node name="KeyBoardButton8" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "پ"
+
+[node name="KeyBoardButton9" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "و"
+
+[node name="KeyBoardButton10" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+visible = false
+layout_mode = 2
+
+[node name="KeyBoardButton11" parent="HBoxContainer3" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = ""
+current_button_type = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer3/KeyBoardButton11"]
+layout_mode = 2
+theme_override_constants/margin_left = 2
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 2
+theme_override_constants/margin_bottom = 0
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer3/KeyBoardButton11/MarginContainer"]
+clip_children = 2
+light_mask = 2
+visibility_layer = 2
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("4_p1jnd")
+expand_mode = 4
+stretch_mode = 5
+
+[node name="Control" type="Control" parent="HBoxContainer3"]
+layout_mode = 2

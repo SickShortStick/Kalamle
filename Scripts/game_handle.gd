@@ -30,6 +30,9 @@ enum GameModes {
 var current_gamemode
 
 
+var keyboard_buttons_changed = []
+
+
 var words : Array
 var guess_word_letters_count = []
 var word_letters_count = []
@@ -64,6 +67,7 @@ var persian_alphabet = [
 @onready var music_player = $MusicPlayer
 @onready var correct_sound = $CorrectSound
 @onready var congrats_panel = $CongratsPanel
+@onready var key_board = $KeyBoard
 
 
 func _ready():
@@ -122,7 +126,8 @@ func _process(delta):
 		timer.start(max_timer_seconds)
 	else:
 		timer_slider.value = timer.time_left * 60
-	if Input.is_action_just_pressed("Enter") and len(guessed_word) == 5:
+	if Input.is_action_just_pressed("Enter") or Input.is_action_pressed("Enter")  and len(guessed_word) == 5:
+		Input.action_release("Enter")
 		var word_is_in_persian = true
 		for letter in guessed_word:
 			if letter not in persian_alphabet:
@@ -130,6 +135,7 @@ func _process(delta):
 		match current_gamemode:
 			GameModes.Daily:
 				if word_is_in_persian and guessed_word in Word.words_list and guessed_word not in Word.daily_guessed_words:
+					change_keyboard_colors()
 					guess()
 				else:
 					error_container.show()
@@ -140,6 +146,7 @@ func _process(delta):
 					error_container.hide()
 			_:
 				if word_is_in_persian and guessed_word in Word.words_list and guessed_word not in guessed_words:
+					change_keyboard_colors()
 					guess()
 				else:
 					error_container.show()
@@ -184,7 +191,29 @@ func create_word_letters_count():
 				word_letters_count.append_array([[letter, 1]])
 
 
+func change_keyboard_colors():
+	var i = 0
+	for button in key_board.key_buttons_pressed:
+		print(button.letter + " || " + word[i])
+		if button.letter == word[i]:
+			button.turn_green()
+		elif button.letter in word:
+			button.turn_yellow()
+		else :
+			button.turn_gray()
+		keyboard_buttons_changed.append(button)
+		i += 1
+	key_board.key_buttons_pressed.clear()
+
+
+func set_up_keyboard_colors():
+	for button in keyboard_buttons_changed:
+		button.turn_blue()
+	keyboard_buttons_changed.clear()
+
+
 func set_up_game_ui():
+	set_up_keyboard_colors()
 	congrats_panel.set_position(initial_congrats_panel_position)
 	score_label_ui.text = "0"
 	match current_gamemode:
@@ -211,6 +240,7 @@ func guess():
 			await check_for_correct_letter()
 			await check_for_in_word_letter()
 		word_text.editable = true
+		word_text.grab_focus()
 		if guessed_word == word:
 			correct_word()
 		elif guessed_times == 6:
@@ -382,8 +412,9 @@ func clear_letters():
 
 
 func congrats_panel_slide():
-	var win_panel_tween = get_tree().create_tween()
+	var win_panel_tween = get_tree().create_tween().set_parallel()
 	win_panel_tween.tween_property(congrats_panel, "position", Vector2.ZERO, 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	win_panel_tween.tween_property(dimmer, "color", Color("a0b7c9"), 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 
 func set_up_game_vars():
@@ -408,12 +439,24 @@ func _on_word_text_text_changed(new_text):
 			col += 1
 
 
+func change_word_ui():
+	if not game_ended:
+		guessed_word = word_text.text
+		col = 0
+		for letter_index in 5:
+			var row_container = v_box_container.get_child(row)
+			var letter_label = row_container.get_child(4 - col).get_child(0)
+			letter_label.text = guessed_word[letter_index] if len(guessed_word) > letter_index else " "
+			col += 1
+
+
 func _on_retry_pressed():
 	word = Word.set_game_word()
 	icon.position += Vector2(0, 15)
 	dimmer.hide()
 	win_panel_container.hide()
 	timer.start(max_timer_seconds)
+	set_up_keyboard_colors()
 	set_up_game_ui()
 	set_up_game_vars()
 
@@ -429,6 +472,7 @@ func _on_back_button_pressed():
 
 func _on_next_level_button_pressed():
 	Word.set_game_word(Word.level + 1)
+	set_up_keyboard_colors()
 	set_up_game_vars()
 	win_panel_container.hide()
 	dimmer.hide()
@@ -436,6 +480,7 @@ func _on_next_level_button_pressed():
 
 func _on_previous_level_button_pressed():
 	Word.set_game_word(Word.level - 1)
+	set_up_keyboard_colors()
 	set_up_game_vars()
 	win_panel_container.hide()
 	dimmer.hide()
@@ -454,6 +499,7 @@ func _on_win_panel_retry_button_pressed():
 	win_panel_container.hide()
 	dimmer.hide()
 	timer.start(max_timer_seconds)
+	set_up_keyboard_colors()
 	set_up_game_ui()
 	set_up_game_vars()
 
