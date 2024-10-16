@@ -330,6 +330,7 @@ func lose():
 				Word.set_high_score(high_score)
 			high_score_label.text = "رکورد\n" + str(high_score)
 		GameModes.Levels:
+			Word.energy -= 1
 			word_label.hide()
 			score_label.hide()
 			if Word.level > 1:

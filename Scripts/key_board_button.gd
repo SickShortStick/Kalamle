@@ -7,6 +7,9 @@ class_name KeyBoardButton
 @onready var button = $Button
 
 
+var can_enter = true
+
+
 @export var current_button_type = ButtonType.Key
 
 
@@ -60,5 +63,9 @@ func _on_button_pressed():
 				keyboard.key_buttons_pressed.remove_at(keyboard.key_buttons_pressed.size() - 1)
 			keyboard.text_changed()
 		ButtonType.Enter:
-			Input.action_press("Enter")
-			keyboard.play_keyboard_sound()
+			if can_enter:
+				can_enter = false
+				Input.action_press("Enter")
+				keyboard.play_keyboard_sound()
+				await get_tree().create_timer(2.5).timeout
+				can_enter = true

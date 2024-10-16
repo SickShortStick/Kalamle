@@ -35,7 +35,21 @@ alignment = 1
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer"]
+[node name="SFXLabel" type="Label" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.101961, 0.12549, 0.227451, 1)
+text = "سایر"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="SFXSlider" type="HSlider" parent="VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"MusicSlider"
+max_value = 1.0
+step = 0.001
+value = 0.5
+
+[node name="MusicLabel" type="Label" parent="VBoxContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.101961, 0.12549, 0.227451, 1)
 text = "موسیقی"
@@ -59,6 +73,8 @@ layout_mode = 2
 size_flags_vertical = 3
 size_flags_stretch_ratio = 3.0
 
+[connection signal="drag_ended" from="VBoxContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_drag_ended"]
+[connection signal="value_changed" from="VBoxContainer/VBoxContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
 [connection signal="drag_ended" from="VBoxContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_drag_ended"]
 [connection signal="value_changed" from="VBoxContainer/VBoxContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
 [connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_button_pressed"]

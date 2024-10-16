@@ -9,12 +9,14 @@ var daily_words_list = []
 var daily_words_done = []
 var daily_guessed_words = []
 var music_volume_value = 0.5
+var sfx_volume_value = 0.5
 
 
 var is_from_levels := false
 var level : int
 var max_level_count = 20
 var high_score := 0
+var energy = 4
 
 
 var last_day = -1

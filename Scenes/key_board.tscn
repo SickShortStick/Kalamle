@@ -68,6 +68,10 @@ letter = "ح"
 layout_mode = 2
 letter = "ج"
 
+[node name="KeyBoardButton12" parent="HBoxContainer" instance=ExtResource("1_3wxrx")]
+layout_mode = 2
+letter = "چ"
+
 [node name="HBoxContainer2" type="HBoxContainer" parent="."]
 layout_mode = 2
 size_flags_vertical = 3
