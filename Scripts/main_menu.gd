@@ -18,9 +18,16 @@ var particle_words = [
 @onready var daily_button = $VBoxContainer2/HBoxContainer/DailyButton
 const green_disabled = preload("res://green_daily_button_disabled.tres")
 const red_disabled = preload("res://red_daily_button_disabled.tres")
+@onready var energy_container = $EnergyContainer
+
+
+const LIGHTNING_ICON = preload("res://Assets/Sprites/Lightning Icon.png")
+const LIGHTNING_EMPTY_ICON = preload("res://Assets/Sprites/Lightning Empty Icon.png")
 
 
 func _ready():
+	Word.in_menu = true
+	Word.in_levels = false
 	for particle in get_tree().get_nodes_in_group("WordParticle"):
 		set_particle_word(particle)
 	for pair in Word.daily_words_done:
@@ -31,6 +38,16 @@ func _ready():
 			elif pair[1]:
 				daily_button.add_theme_stylebox_override("disabled", red_disabled)
 			break
+	change_energy_ui()
+
+
+func change_energy_ui():
+	var energy_icons = energy_container.get_children()
+	for i in Word.max_energy:
+		if i < Word.energy:
+			energy_icons[i].texture = LIGHTNING_ICON
+		else :
+			energy_icons[i].texture = LIGHTNING_EMPTY_ICON
 
 
 func set_particle_word(particle : CPUParticles2D):
@@ -40,7 +57,6 @@ func set_particle_word(particle : CPUParticles2D):
 func _on_start_button_pressed():
 	SceneManager.change_scene(main_scene)
 	Word.set_gamemode(Word.GameModes.Endless)
-	print("RST")
 
 
 func _on_shop_button_pressed():

@@ -9,7 +9,7 @@ func _ready():
 	if FileAccess.file_exists(save_path):
 		var file = FileAccess.open(save_path, FileAccess.READ)
 		var saved_dict : Dictionary = file.get_var()
-		if saved_dict.size() == 7:
+		if saved_dict.size() == 9:
 			load_data()
 		else:
 			save_data()
@@ -28,9 +28,10 @@ func save_data():
 		"daily_words_done" : Word.daily_words_done,
 		"last_day" : Word.last_day,
 		"music_volume_value" : Word.music_volume_value,
-		"sfx_volume_value" : Word.sfx_volume_value
+		"sfx_volume_value" : Word.sfx_volume_value,
+		"last_unix" : Word.last_unix if Word.last_unix != null else int(Time.get_unix_time_from_system()),
+		"energy" : Word.energy
 	})
-	print(file.get_var())
 	file.close()
 
 
@@ -44,5 +45,7 @@ func load_data():
 	Word.last_day = saved_dict.get("last_day")
 	Word.music_volume_value = saved_dict.get("music_volume_value")
 	Word.sfx_volume_value = saved_dict.get("sfx_volume_value")
+	Word.last_unix = saved_dict.get("last_unix")
+	Word.energy = saved_dict.get("energy")
 	print(saved_dict)
 	file.close()

@@ -683,6 +683,7 @@ color = Color(0.152941, 0.215686, 0.301961, 1)
 metadata/_edit_use_anchors_ = true
 
 [node name="TimerSlider" type="HSlider" parent="PanelContainer/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 1
@@ -790,6 +791,7 @@ alignment = 1
 [node name="ScoreLabel" type="Label" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
 layout_mode = 2
 theme_type_variation = &"WinPanelLabel"
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
 text = "امتیاز
 0"
 horizontal_alignment = 1
@@ -798,6 +800,7 @@ vertical_alignment = 1
 [node name="HighScoreLabel" type="Label" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer/PanelContainer/HBoxContainer2"]
 layout_mode = 2
 theme_type_variation = &"WinPanelLabel"
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
 text = "رکورد
 0"
 horizontal_alignment = 1
@@ -807,6 +810,7 @@ vertical_alignment = 1
 layout_mode = 2
 size_flags_vertical = 8
 theme_type_variation = &"WinPanelLabel"
+theme_override_colors/font_color = Color(0.152941, 0.215686, 0.301961, 1)
 horizontal_alignment = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CongratsPanel/WinPanelContainer/MarginContainer/VBoxContainer"]

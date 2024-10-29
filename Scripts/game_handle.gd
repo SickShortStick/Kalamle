@@ -71,8 +71,10 @@ var persian_alphabet = [
 
 
 func _ready():
+	Word.in_menu = false
+	Word.in_levels = false
 	initial_congrats_panel_position = congrats_panel.position
-	print(get_viewport().size)
+	print(congrats_panel.position)
 	final_congrats_panel_position = Vector2(0, get_viewport().size[1])
 	var music_tween = get_tree().create_tween()
 	music_tween.tween_property(music_player, "volume_db", 0, 2).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN)
@@ -134,7 +136,7 @@ func _process(delta):
 				word_is_in_persian = false
 		match current_gamemode:
 			GameModes.Daily:
-				if word_is_in_persian and guessed_word in Word.words_list and guessed_word not in Word.daily_guessed_words:
+				if word_is_in_persian and guessed_word in Word.guessable_words and guessed_word not in Word.daily_guessed_words:
 					change_keyboard_colors()
 					guess()
 				else:
@@ -145,7 +147,7 @@ func _process(delta):
 					error_container.modulate = Color.WHITE
 					error_container.hide()
 			_:
-				if word_is_in_persian and guessed_word in Word.words_list and guessed_word not in guessed_words:
+				if word_is_in_persian and guessed_word in Word.guessable_words and guessed_word not in guessed_words:
 					change_keyboard_colors()
 					guess()
 				else:
@@ -180,7 +182,7 @@ func create_word_letters_count():
 		var letter_is_in_count = false
 		if word_letters_count.is_empty():
 			word_letters_count.append_array([[letter, 1]])
-		else :
+		else:
 			var index = 0
 			for letter_array in word_letters_count:
 				if letter == letter_array[0]:
@@ -281,6 +283,8 @@ func check_for_correct_letter():
 					word_letters_count_copy[pair_index][1] -= 1
 					break
 				pair_index += 1
+		else :
+			color_tween.kill()
 		i += 1
 
 
@@ -302,6 +306,8 @@ func check_for_in_word_letter():
 					elif letter != word[ii]:
 						color_tween.tween_property(color_rect, "color", incorrect_color, 0.3)
 						await color_tween.finished
+					else:
+						color_tween.kill()
 				pair_index += 1
 		else :
 			color_tween.tween_property(color_rect, "color", incorrect_color, 0.3)
@@ -330,9 +336,11 @@ func lose():
 				Word.set_high_score(high_score)
 			high_score_label.text = "رکورد\n" + str(high_score)
 		GameModes.Levels:
+			Word.lose_energy()
 			Word.energy -= 1
 			word_label.hide()
 			score_label.hide()
+			high_score_label.hide()
 			if Word.level > 1:
 				previous_level_button.show()
 			else:
@@ -342,6 +350,8 @@ func lose():
 		GameModes.Daily:
 			Word.daily_words_done.append([Word.day, true, false])
 			win_panel_retry_button.hide()
+			high_score_label.hide()
+			score_label.hide()
 			previous_level_button.hide()
 			next_level_button.hide()
 	congrats_panel_slide()
@@ -361,6 +371,7 @@ func correct_word():
 			win_label.add_theme_color_override("font_color", Color("1fd655"))
 			win_label.add_theme_color_override("font_outline_color", Color("1fd655"))
 			dimmer.show()
+			high_score_label.hide()
 			win_label.text = "برد!"
 			win_panel_retry_button.hide()
 			correct_sound.play()
@@ -472,6 +483,7 @@ func _on_back_button_pressed():
 
 
 func _on_next_level_button_pressed():
+	congrats_panel.set_position(initial_congrats_panel_position)
 	Word.set_game_word(Word.level + 1)
 	set_up_keyboard_colors()
 	set_up_game_vars()
@@ -481,6 +493,7 @@ func _on_next_level_button_pressed():
 
 func _on_previous_level_button_pressed():
 	Word.set_game_word(Word.level - 1)
+	congrats_panel.set_position(initial_congrats_panel_position)
 	set_up_keyboard_colors()
 	set_up_game_vars()
 	win_panel_container.hide()

@@ -1,0 +1,33 @@
+[remap]
+
+importer="font_data_dynamic"
+type="FontFile"
+uid="uid://dwe88upxyk2jn"
+path="res://.godot/imported/persian-entezar (5).ttf-575e5d726d3b619f10b1a1d87e61debc.fontdata"
+
+[deps]
+
+source_file="res://Assets/Font/Persian/persian-entezar (5).ttf"
+dest_files=["res://.godot/imported/persian-entezar (5).ttf-575e5d726d3b619f10b1a1d87e61debc.fontdata"]
+
+[params]
+
+Rendering=null
+antialiasing=1
+generate_mipmaps=false
+multichannel_signed_distance_field=false
+msdf_pixel_range=8
+msdf_size=48
+allow_system_fallback=true
+force_autohinter=false
+hinting=1
+subpixel_positioning=1
+oversampling=0.0
+Fallbacks=null
+fallbacks=[]
+Compress=null
+compress=true
+preload=[]
+language_support={}
+script_support={}
+opentype_features={}

@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://bbcv0op4eyasa"]
+[gd_scene load_steps=5 format=3 uid="uid://bbcv0op4eyasa"]
 
 [ext_resource type="Script" path="res://Scripts/main_menu.gd" id="1_o1tcy"]
+[ext_resource type="Texture2D" uid="uid://btv1n1f07uad8" path="res://Assets/Sprites/Lightning Icon.png" id="3_7ngr4"]
 [ext_resource type="PackedScene" uid="uid://lw4jgjfnuvd8" path="res://Scenes/word_particle.tscn" id="3_ww0uy"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_6b4k5"]
@@ -111,6 +112,44 @@ position = Vector2(39, 59.5)
 points = PackedVector2Array(-51, 0, 98, 0)
 width = 2.0
 default_color = Color(0.321569, 0.427451, 0.509804, 1)
+
+[node name="EnergyContainer" type="HBoxContainer" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -209.0
+offset_right = -6.0
+offset_bottom = -176.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("3_7ngr4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("3_7ngr4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("3_7ngr4")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("3_7ngr4")
+expand_mode = 2
+stretch_mode = 5
 
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/DailyButton" to="." method="_on_daily_button_pressed"]
 [connection signal="pressed" from="VBoxContainer2/HBoxContainer/StartButton" to="." method="_on_start_button_pressed"]

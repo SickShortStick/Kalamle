@@ -33,7 +33,7 @@ window/handheld/orientation=1
 [gui]
 
 theme/custom="res://game_theme.tres"
-theme/custom_font="res://Assets/Font/B Traffic_0.ttf"
+theme/custom_font="res://Assets/Font/Persian/Persian-JalalBd.ttf"
 
 [input]
 

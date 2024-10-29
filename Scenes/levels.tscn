@@ -1,7 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://jqk82v0f2ao1"]
+[gd_scene load_steps=12 format=3 uid="uid://jqk82v0f2ao1"]
 
 [ext_resource type="Theme" uid="uid://xmkaqew0wm0o" path="res://game_theme.tres" id="1_fhsfx"]
 [ext_resource type="Script" path="res://Scripts/levels.gd" id="1_kb6n2"]
+[ext_resource type="Texture2D" uid="uid://btv1n1f07uad8" path="res://Assets/Sprites/Lightning Icon.png" id="2_4y5nw"]
 [ext_resource type="PackedScene" uid="uid://dldqypg5hj58q" path="res://Scenes/level_button.tscn" id="2_74k8g"]
 [ext_resource type="PackedScene" uid="uid://lw4jgjfnuvd8" path="res://Scenes/word_particle.tscn" id="4_s38jl"]
 [ext_resource type="Texture2D" uid="uid://d1fcwkxmndk4a" path="res://Assets/Sprites/ArrowIcon.png" id="6_iegal"]
@@ -29,6 +30,46 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kb6n2")
+
+[node name="EnergyContainer" type="HBoxContainer" parent="."]
+z_index = 10
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -219.0
+offset_right = 120.0
+offset_bottom = -174.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("2_4y5nw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect2" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("2_4y5nw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect3" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("2_4y5nw")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="TextureRect4" type="TextureRect" parent="EnergyContainer"]
+layout_mode = 2
+texture = ExtResource("2_4y5nw")
+expand_mode = 2
+stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 z_index = 10
