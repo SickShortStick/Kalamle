@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://jqk82v0f2ao1"]
 
 [ext_resource type="Theme" uid="uid://xmkaqew0wm0o" path="res://game_theme.tres" id="1_fhsfx"]
-[ext_resource type="Script" path="res://Scripts/levels.gd" id="1_kb6n2"]
+[ext_resource type="Script" uid="uid://bfkgycw55nys1" path="res://Scripts/levels.gd" id="1_kb6n2"]
 [ext_resource type="Texture2D" uid="uid://btv1n1f07uad8" path="res://Assets/Sprites/Lightning Icon.png" id="2_4y5nw"]
 [ext_resource type="PackedScene" uid="uid://dldqypg5hj58q" path="res://Scenes/level_button.tscn" id="2_74k8g"]
 [ext_resource type="PackedScene" uid="uid://lw4jgjfnuvd8" path="res://Scenes/word_particle.tscn" id="4_s38jl"]

@@ -13,6 +13,7 @@ var is_completed := false
 func _on_button_pressed():
 	if Word.energy > 0:
 		Word.set_game_word(button_index)
+		Word.energy -= 1
 		await SceneManager.change_scene(game_scene)
 	else:
 		energy_notif.show()

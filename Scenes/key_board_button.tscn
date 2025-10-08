@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b610w200qrciu"]
 
-[ext_resource type="Script" path="res://Scripts/key_board_button.gd" id="1_i4ww8"]
+[ext_resource type="Script" uid="uid://bul11a0tvp5mt" path="res://Scripts/key_board_button.gd" id="1_i4ww8"]
 
 [node name="KeyBoardButton" type="PanelContainer"]
 clip_children = 2

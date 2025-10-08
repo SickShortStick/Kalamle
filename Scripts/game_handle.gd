@@ -121,7 +121,7 @@ func _ready():
 	#word_text.grab_focus()
 
 
-func _process(delta):
+func _process(_delta):
 	time_label.text = Time.get_time_string_from_system()
 	if timer.time_left > max_timer_seconds:
 		timer_slider.value = timer_slider.max_value - 1
@@ -254,7 +254,6 @@ func guess():
 		word_text.text = ""
 		match current_gamemode:
 			GameModes.Daily:
-				guessed_words.append(guessed_word)
 				if Word.daily_guessed_words.size() < guessed_words.size():
 					Word.daily_guessed_words = guessed_words
 				SaveManager.save_data()
@@ -269,7 +268,6 @@ func guess():
 
 func check_for_correct_letter():
 	var i : int = 0
-	var index = 0
 	for letter in guessed_word:
 		var color_tween = get_parent().create_tween()
 		var color_rect : ColorRect = v_box_container.get_child(row).get_child(4 - i).get_child(1)
@@ -366,6 +364,7 @@ func correct_word():
 	match current_gamemode:
 		GameModes.Levels:
 			Word.add_completed_level()
+			Word.energy += 1
 			game_ended = true
 			score_label.hide()
 			win_label.add_theme_color_override("font_color", Color("1fd655"))
@@ -398,6 +397,7 @@ func correct_word():
 			correct_sound.volume_db = -8
 			correct_sound.play()
 			set_up_game_vars()
+			set_up_keyboard_colors()
 		GameModes.Daily:
 			congrats_panel_slide()
 			correct_sound.play()
@@ -464,7 +464,7 @@ func change_word_ui():
 
 func _on_retry_pressed():
 	word = Word.set_game_word()
-	icon.position += Vector2(0, 15)
+	#icon.position += Vector2(0, 15)
 	dimmer.hide()
 	win_panel_container.hide()
 	timer.start(max_timer_seconds)
@@ -474,7 +474,8 @@ func _on_retry_pressed():
 
 
 func _on_retry_button_up():
-	icon.position -= Vector2(0, 15)
+	#icon.position -= Vector2(0, 15)
+	pass
 
 
 func _on_back_button_pressed():

@@ -47,9 +47,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_35c3b"]
 _data = {
-"RESET": SubResource("Animation_itqxa"),
-"fade_in": SubResource("Animation_kd0wp"),
-"fade_out": SubResource("Animation_fvw7o")
+&"RESET": SubResource("Animation_itqxa"),
+&"fade_in": SubResource("Animation_kd0wp"),
+&"fade_out": SubResource("Animation_fvw7o")
 }
 
 [node name="Pattern" type="AnimationPlayer"]

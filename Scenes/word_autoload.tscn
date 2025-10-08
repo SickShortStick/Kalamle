@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dfhm5ocbbu4cr"]
 
-[ext_resource type="Script" path="res://Scripts/word_autoload.gd" id="1_uub86"]
+[ext_resource type="Script" uid="uid://berhbdw0cyth5" path="res://Scripts/word_autoload.gd" id="1_uub86"]
 
 [node name="WordAutoload" type="Node"]
 script = ExtResource("1_uub86")
